@@ -64,7 +64,7 @@ class Division():
         sb = 0
         for c1 in clusters:
             for c2 in clusters:
-                if (c1.elements != c2.elements).all():
+                if ((c1 != c2)):
                     sb += self.c_distance(self,c1.elements, c2.elements)
         return sb/2
 
@@ -92,6 +92,10 @@ class Division():
         
         new_nw = self.nw(new_cluster)
         new_nb = self.nb(new_cluster)
+
+        temp1 = new_nw
+        if temp1 == 0:
+            return np.inf
 
         temp = ((new_sw / new_nw) - (old_sw) / (old_nw) )
         if temp == 0:
@@ -208,7 +212,7 @@ class Division():
 
         
 #   Example
-division = Division('euclidean','complete', 'frey')
+division = Division('euclidean','single', 'frey')
 a = [[1,2,3,4,5], [1, 4, 10, 500, 503]]
 b = np.ndarray((2,5))
 for x in range(len(a)):
